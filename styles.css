@@ -1,74 +1,70 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-    font-family: sans-serif;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 body {
-    text-align: center;
-    display: block;
+  text-align: center;
+  display: block;
 }
 
 .nav {
-    display: flex;
-    background-color: grey;
-    color:white;
-    padding: 5px;
-    font-size: 1.25rem;
-    position: relative;
+  display: flex;
+  background-color: grey;
+  color: white;
+  padding: 5px;
+  font-size: 1.25rem;
+  position: relative;
 }
 
 #link {
-    text-decoration: none;
-    text-align: left;
-    color: white;
-    left: 5px;
-
+  text-decoration: none;
+  text-align: left;
+  color: white;
+  left: 5px;
 }
 
 #time {
-    text-align: right;
-    color: white;
-    position: absolute;
-    right: 5px;
-    
-
+  text-align: right;
+  color: white;
+  position: absolute;
+  right: 5px;
 }
 
 #tracker {
-
-}
-
-.header {
-
 }
 
 #title {
-
 }
 
-#textbox {
-    border-style: ridge;
-    border-radius: 5px;;
-    width: 50%;
-    margin: auto;
-    padding: 20px;
+#intro {
+  border-style: ridge;
+  border-radius: 5px;
+  width: 50%;
+  margin: auto;
+  padding: 20px;
 }
 
-#start {
-    font-size: 1.5rem;
-    color: white;
-    border-style: double;
-    border-radius: 10px;
-    background-color: lightseagreen;
-    margin: 20px;
-    width: 200px;
-    height: 50px;
+#start-btn {
+  font-size: 1.5rem;
+  color: white;
+  border-style: double;
+  border-radius: 10px;
+  margin: 20px;
+  width: 200px;
+  height: 50px;
 }
 
 .btn {
-    color: white;
-    border-style: double;
-    border-radius: 10px;
-    background-color: lightseagreen;
-    margin: 20px;
+  color: white;
+  border-style: double;
+  border-radius: 10px;
+  background-color: lightseagreen;
+  margin: 20px;
+}
+
+.btn:hover {
+  background-color: slategray;
 }
