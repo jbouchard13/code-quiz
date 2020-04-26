@@ -7,6 +7,8 @@ var timerElement = document.querySelector("#timer");
 var introElement = document.querySelector("#intro");
 var startButtonElement = document.querySelector("#start-btn");
 var questionsDivElement = document.querySelector("#questions-div");
+var questionElement = document.querySelector("#question");
+var answerBtnsElement = document.querySelector("#answer-btns");
 var submitScoresElement = document.querySelector("#submit-score");
 var submitBtnElement = document.querySelector("#submit-btn");
 var highscoresBtnElement = document.querySelector("#highscores-btn");
@@ -22,49 +24,67 @@ var currentCount = 0;
 var questions = [
   {
     question: "This is a question?",
-    answers: ["answer 1", "answer 2", "answer 3", "answer 4"],
-    correctAnswer: 0,
+    answers: [
+      { text: "answer 1", correct: false },
+      { text: "answer 2", correct: true },
+      { text: "answer 3", correct: false },
+      { text: "answer 4", correct: false },
+    ],
   },
   {
-    question: "This is another question here?",
-    answers: ["answer 1", "answer 2", "answer 3", "answer 4"],
-    correctAnswer: 2,
+    question: "This is another question?",
+    answers: [
+      { text: "answer 1", correct: false },
+      { text: "answer 2", correct: false },
+      { text: "answer 3", correct: false },
+      { text: "answer 4", correct: true },
+    ],
   },
   {
-    question: "But wait, there's more questions?",
-    answers: ["answer 1", "answer 2", "answer 3", "answer 4"],
-    correctAnswer: 2,
+    question: "How are there more questions?",
+    answers: [
+      { text: "answer 1", correct: false },
+      { text: "answer 2", correct: false },
+      { text: "answer 3", correct: true },
+      { text: "answer 4", correct: false },
+    ],
   },
   {
     question: "Surely there can't be more questions?",
-    answers: ["answer 1", "answer 2", "answer 3", "answer 4"],
-    correctAnswer: 1,
+    answers: [
+      { text: "answer 1", correct: false },
+      { text: "answer 2", correct: true },
+      { text: "answer 3", correct: false },
+      { text: "answer 4", correct: false },
+    ],
   },
 ];
 
 // Create variable to store the index of the current question they are answering
-//  - (string) question
-//  - array of possible answers (list)
-//  - correct answer (number, index of the answer from array of possible answers)
+var questionIndex;
 
 // ********************** QUIZ START *********************
 // When the user clicks on start:
 // - create an event listener for the start button
-startButtonElement.addEventListener("click", function () {
+startButtonElement.addEventListener("click", startQuiz);
+
+function startQuiz() {
   // - hide the intro <div>
   introElement.style.display = "none";
   // - hide the start button (#start-btn)
   startButtonElement.style.display = "none";
+  // - Set the question index to 0 for the start
+  questionIndex = 0;
   // - start timer with countdownTimer function
   countdownTimer();
+  // - Show the #questions-div on the page
+  questionsDivElement.classList.remove("hide");
   // Start quiz
-  renderQuestion();
-});
+  renderQuestion(questions[questionIndex]);
+}
 
-function renderQuestion() {
+function renderQuestion(question) {
   // - render the first question
-  questionsArray = Object.values(questions);
-  questionsDivElement.innerHTML = questionsArray[1];
   // - using DOM manipulation, create a new element (document.createElement) with the question info, and display it on screen (appendChild)
   // Once the game has started, display the first question, with buttons for the answers
   // When a user clicks on one of those questions, determine if it is correct or incorrect, display the next question, and display the status of their answer (correct/incorrect, for a short time)

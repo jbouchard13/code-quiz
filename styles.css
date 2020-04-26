@@ -37,12 +37,6 @@ body {
   right: 5px;
 }
 
-#tracker {
-}
-
-#title {
-}
-
 #intro {
   border: ridge 10px slategrey;
   border-radius: 10px;
@@ -51,9 +45,6 @@ body {
   padding: 20px;
   position: relative;
   top: 30px;
-}
-
-#questions-div {
 }
 
 #start-btn {
@@ -84,4 +75,19 @@ body {
   justify-content: center;
   text-align: center;
   display: flex;
+}
+
+#questions-div {
+  padding-top: 50px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 75vh;
+}
+
+#answer-btns {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
 }
