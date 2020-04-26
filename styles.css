@@ -10,9 +10,13 @@ body {
   display: block;
 }
 
+.hide {
+  display: none;
+}
+
 .nav {
   display: flex;
-  background-color: grey;
+  background-color: slategrey;
   color: white;
   padding: 5px;
   font-size: 1.25rem;
@@ -40,11 +44,16 @@ body {
 }
 
 #intro {
-  border-style: ridge;
-  border-radius: 5px;
+  border: ridge 10px slategrey;
+  border-radius: 10px;
   width: 50%;
   margin: auto;
   padding: 20px;
+  position: relative;
+  top: 30px;
+}
+
+#questions-div {
 }
 
 #start-btn {
@@ -55,6 +64,8 @@ body {
   margin: 20px;
   width: 200px;
   height: 50px;
+  position: relative;
+  top: 30px;
 }
 
 .btn {
@@ -67,4 +78,10 @@ body {
 
 .btn:hover {
   background-color: slategray;
+}
+
+.highscores {
+  justify-content: center;
+  text-align: center;
+  display: flex;
 }
