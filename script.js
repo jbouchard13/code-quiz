@@ -23,21 +23,24 @@ var currentCount = 0;
 // Create variable to store the array of questions
 var questions = [
   {
-    question: "This is a question?",
+    question: "In JavaScript, what is an array?",
     answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: true },
-      { text: "answer 3", correct: false },
-      { text: "answer 4", correct: false },
+      { text: "Some other possible answer here", correct: false },
+      {
+        text: "A single variable used to store multiple elements.",
+        correct: true,
+      },
+      { text: "A pre-written function that can be called.", correct: false },
+      { text: "A ray of sunshine.", correct: false },
     ],
   },
   {
-    question: "This is another question?",
+    question: "What does the querySelector() function do?",
     answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: false },
+      { text: "Selects a question in the document.", correct: false },
+      { text: "", correct: false },
       { text: "answer 3", correct: false },
-      { text: "answer 4", correct: true },
+      { text: "Finds the provided element on a page.", correct: true },
     ],
   },
   {
@@ -84,14 +87,24 @@ function startQuiz() {
 }
 
 function renderQuestion(question) {
-  // - render the first question
-  // - using DOM manipulation, create a new element (document.createElement) with the question info, and display it on screen (appendChild)
   // Once the game has started, display the first question, with buttons for the answers
+  questionElement.innerText = question.question;
+  question.answers.forEach(function (answer) {
+    var button = document.createElement("button");
+    button.innerText = answer.text;
+    button.classList.add("btn", "answerBtn");
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    // - using DOM manipulation, create a new element (document.createElement) with the question info, and display it on screen (appendChild)
+    answerBtnsElement.appendChild(button);
+  });
+
   // When a user clicks on one of those questions, determine if it is correct or incorrect, display the next question, and display the status of their answer (correct/incorrect, for a short time)
 }
 
-// - create a setInterval of 75000ms.
 function countdownTimer() {
+  // - create a setInterval of 75000ms.
   currentCount = 75;
   // - update the currentCount to 75
   var countInterval = setInterval(function () {

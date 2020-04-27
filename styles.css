@@ -87,7 +87,23 @@ body {
 }
 
 #answer-btns {
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
   display: grid;
   grid-template-columns: repeat(2, auto);
-  gap: 10px;
+  gap: 20px;
+}
+
+.answerBtn {
+  font-size: 15px;
+  width: 25vh;
+  height: 5vh;
+}
+
+#question {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  align-items: center;
 }
