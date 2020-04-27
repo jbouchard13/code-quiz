@@ -38,34 +38,26 @@ var questions = [
     question: "What does the querySelector() function do?",
     answers: [
       { text: "Selects a question in the document.", correct: false },
-      { text: "", correct: false },
-      { text: "answer 3", correct: false },
-      { text: "Finds the provided element on a page.", correct: true },
+      { text: "Finds a search bar in the HTML.", correct: false },
+      { text: "Searches through media queries.", correct: false },
+      { text: "Finds the selected element on a document.", correct: true },
     ],
   },
   {
-    question: "How are there more questions?",
+    question: "What does DOM stand for?",
     answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: false },
-      { text: "answer 3", correct: true },
-      { text: "answer 4", correct: false },
-    ],
-  },
-  {
-    question: "Surely there can't be more questions?",
-    answers: [
-      { text: "answer 1", correct: false },
-      { text: "answer 2", correct: true },
-      { text: "answer 3", correct: false },
-      { text: "answer 4", correct: false },
+      { text: "Detailed Object Manipulation", correct: false },
+      { text: "Decrease Original Material", correct: false },
+      { text: "Document Object Model", correct: true },
+      { text: "Data Open Manipulation", correct: false },
     ],
   },
 ];
 
 // Create variable to store the index of the current question they are answering
 var questionIndex;
-
+var button;
+var buttonElement;
 // ********************** QUIZ START *********************
 // When the user clicks on start:
 // - create an event listener for the start button
@@ -89,18 +81,42 @@ function startQuiz() {
 function renderQuestion(question) {
   // Once the game has started, display the first question, with buttons for the answers
   questionElement.innerText = question.question;
+  // For each answer for the question
   question.answers.forEach(function (answer) {
+    // create a button
     var button = document.createElement("button");
+    // set the button text to an answer
     button.innerText = answer.text;
-    button.classList.add("btn", "answerBtn");
+    // add the .btn class and #answerBtn id to each for styling and identity
+    button.setAttribute("class", "btn answerBtn");
+
+    // if the answer is correct, add a correct data attribute to it
     if (answer.correct) {
       button.dataset.correct = answer.correct;
     }
-    // - using DOM manipulation, create a new element (document.createElement) with the question info, and display it on screen (appendChild)
+    // append each button to the answerbtn page element
     answerBtnsElement.appendChild(button);
+    button.addEventListener("click", function () {
+      console.log("clicked");
+      questionIndex++;
+      nextQuestion();
+    });
   });
+}
+
+function nextQuestion() {
+  // remove the previous question from the page to make room for the next one
+  removeLastQuestion();
 
   // When a user clicks on one of those questions, determine if it is correct or incorrect, display the next question, and display the status of their answer (correct/incorrect, for a short time)
+  renderQuestion(questions[questionIndex]);
+}
+
+function removeLastQuestion() {
+  // Remove the button elements from the previous question
+  while (answerBtnsElement.firstChild) {
+    answerBtnsElement.removeChild(answerBtnsElement.firstChild);
+  }
 }
 
 function countdownTimer() {
