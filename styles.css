@@ -71,10 +71,13 @@ body {
   background-color: slategray;
 }
 
-.highscores {
-  justify-content: center;
+#highscores {
   text-align: center;
-  display: flex;
+}
+
+#highscores-table {
+  border: ridge lightseagreen 5px;
+  margin: 0 auto;
 }
 
 #questions-div {
@@ -106,4 +109,9 @@ body {
   font-size: 30px;
   font-weight: bold;
   align-items: center;
+}
+
+#submit-score {
+  margin: 0 auto;
+  padding: 20px;
 }

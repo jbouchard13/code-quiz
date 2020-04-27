@@ -97,7 +97,6 @@ function renderQuestion(question) {
     // append each button to the answerbtn page element
     answerBtnsElement.appendChild(button);
     button.addEventListener("click", function () {
-      console.log("clicked");
       questionIndex++;
       nextQuestion();
     });
@@ -114,14 +113,21 @@ function nextQuestion() {
 
 function removeLastQuestion() {
   // Remove the button elements from the previous question
-  while (answerBtnsElement.firstChild) {
-    answerBtnsElement.removeChild(answerBtnsElement.firstChild);
+  // If there are answer buttons
+  if (answerBtnsElement.firstChild) {
+    // Run the while loop to remove them
+    while (answerBtnsElement.firstChild) {
+      answerBtnsElement.removeChild(answerBtnsElement.firstChild);
+    }
+    // Otherwise, run the endGame function
+  } else {
+    endGame();
   }
 }
 
 function countdownTimer() {
   // - create a setInterval of 75000ms.
-  currentCount = 75;
+  currentCount = 1;
   // - update the currentCount to 75
   var countInterval = setInterval(function () {
     if (currentCount > 0) {
@@ -141,6 +147,13 @@ function countdownTimer() {
 // End condition
 //  - generate endGame function to use for both end conditions
 function endGame() {
+  questionsDivElement.setAttribute("class", "hide");
+  submitScoresElement.setAttribute("class", "container");
+  score = currentCount + score;
+  userScore.textContent = score;
+  submitScoresElement.addEventListener("submit", function (event) {
+    event.preventDefault();
+  });
   // When the game ends, allow the user to enter their initials and store their score
   // - Display an entry form to submit their initials and score
   // - Display a button to redirect them to the highscores
