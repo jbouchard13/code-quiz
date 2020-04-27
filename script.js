@@ -58,6 +58,7 @@ var questions = [
 var questionIndex;
 var button;
 var buttonElement;
+var countInterval;
 // ********************** QUIZ START *********************
 // When the user clicks on start:
 // - create an event listener for the start button
@@ -84,7 +85,7 @@ function renderQuestion(question) {
   // For each answer for the question
   question.answers.forEach(function (answer) {
     // create a button
-    var button = document.createElement("button");
+    button = document.createElement("button");
     // set the button text to an answer
     button.innerText = answer.text;
     // add the .btn class and #answerBtn id to each for styling and identity
@@ -96,11 +97,28 @@ function renderQuestion(question) {
     }
     // append each button to the answerbtn page element
     answerBtnsElement.appendChild(button);
+    // add event listeners to the buttons
     button.addEventListener("click", function () {
+      // add 1 to the question index to prepare the next question to come up
       questionIndex++;
+      // check the users answer to see if it is correct using the checkQuestion function
+      checkQuestion();
+      // run the nextQuestion function to bring up the next question when clicked
       nextQuestion();
     });
   });
+}
+
+function checkQuestion() {
+  // check the data attribute of the selected answer
+  var button = document.querySelectorAll("answerBtn");
+  console.log("clicked", button);
+  // if the answer is correct:
+  // - add 1 to the users score
+  // - display to the user that the answer is correct
+  // if the answer is wrong:
+  // - remove 10 seconds from the time
+  // - display to the user that the answer is wrong
 }
 
 function nextQuestion() {
@@ -114,7 +132,7 @@ function nextQuestion() {
 function removeLastQuestion() {
   // Remove the button elements from the previous question
   // If there are answer buttons
-  if (answerBtnsElement.firstChild) {
+  if (questionIndex < 3) {
     // Run the while loop to remove them
     while (answerBtnsElement.firstChild) {
       answerBtnsElement.removeChild(answerBtnsElement.firstChild);
@@ -122,12 +140,13 @@ function removeLastQuestion() {
     // Otherwise, run the endGame function
   } else {
     endGame();
+    clearInterval(countInterval);
   }
 }
 
 function countdownTimer() {
-  // - create a setInterval of 75000ms.
-  currentCount = 1;
+  // - create a setInterval of 75 seconds.
+  currentCount = 75;
   // - update the currentCount to 75
   var countInterval = setInterval(function () {
     if (currentCount > 0) {
@@ -147,18 +166,17 @@ function countdownTimer() {
 // End condition
 //  - generate endGame function to use for both end conditions
 function endGame() {
+  // hide the questions div from the user
   questionsDivElement.setAttribute("class", "hide");
+  // show the submit form and the users score
   submitScoresElement.setAttribute("class", "container");
+  // set the score to the time remaining plus their scores from the answers
   score = currentCount + score;
   userScore.textContent = score;
+  // add an event listener to the submit button
   submitScoresElement.addEventListener("submit", function (event) {
+    // prevent the default of the page
     event.preventDefault();
+    // save the user's score and initials to the local storage
   });
-  // When the game ends, allow the user to enter their initials and store their score
-  // - Display an entry form to submit their initials and score
-  // - Display a button to redirect them to the highscores
-  // Redirect the user to the highscores page, which will display all of the stored high scores
 }
-
-//  - User answers all of the questions OR
-//  - Time runs out
